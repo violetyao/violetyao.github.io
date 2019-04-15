@@ -1,9 +1,3 @@
-/*!
- * Start Bootstrap - Clean Blog v5.0.3 (https://startbootstrap.com/template-overviews/clean-blog)
- * Copyright 2013-2019 Start Bootstrap
- * Licensed under MIT (https://github.com/BlackrockDigital/startbootstrap-clean-blog/blob/master/LICENSE)
- */
-
 body {
     font-size: 20px;
     color: #3e3e3e;
@@ -29,6 +23,88 @@ h5,
 h6 {
     font-weight: 800;
     font-family: 'Quattrocento', serif;
+}
+
+p.original-font {
+    font-family: 'Quattrocento', serif;
+    font-size: 16px;
+}
+
+div.linkshare-image{
+    display: none;
+}
+
+.skillbar {
+    position: relative;
+    display: block;
+    margin-bottom: 15px;
+    width: 100%;
+    background: #eee;
+    height: 35px;
+    border-radius: 3px;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    -webkit-transition: 0.4s linear;
+    -moz-transition: 0.4s linear;
+    -ms-transition: 0.4s linear;
+    -o-transition: 0.4s linear;
+    transition: 0.4s linear;
+    -webkit-transition-property: width, background-color;
+    -moz-transition-property: width, background-color;
+    -ms-transition-property: width, background-color;
+    -o-transition-property: width, background-color;
+    transition-property: width, background-color;
+}
+
+.skillbar-title {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 110px;
+    font-weight: bold;
+    font-size: 13px;
+    color: #ffffff;
+    background: #6adcfa;
+    -webkit-border-top-left-radius: 3px;
+    -webkit-border-bottom-left-radius: 4px;
+    -moz-border-radius-topleft: 3px;
+    -moz-border-radius-bottomleft: 3px;
+    border-top-left-radius: 3px;
+    border-bottom-left-radius: 3px;
+}
+
+.skillbar-title span {
+    display: block;
+    background: rgba(0, 0, 0, 0.1);
+    padding: 0 20px;
+    height: 35px;
+    line-height: 35px;
+    -webkit-border-top-left-radius: 3px;
+    -webkit-border-bottom-left-radius: 3px;
+    -moz-border-radius-topleft: 3px;
+    -moz-border-radius-bottomleft: 3px;
+    border-top-left-radius: 3px;
+    border-bottom-left-radius: 3px;
+}
+
+.skillbar-bar {
+    height: 35px;
+    width: 0;
+    background: #6adcfa;
+    border-radius: 3px;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+}
+
+.skill-bar-percent {
+    position: absolute;
+    right: 10px;
+    top: 0;
+    font-size: 11px;
+    height: 35px;
+    line-height: 35px;
+    color: #ffffff;
+    color: rgba(0, 0, 0, 0.4);
 }
 
 .MathJax {
@@ -85,6 +161,35 @@ div.resume-section-subtitle {
 div.resume-body {
     color: #8f8f8f;
     font-size: 0.9em;
+}
+
+div.canvas-overlay {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 100%;
+    width: 100%;
+    opacity: 0;
+    transition: .5s ease;
+    background-color: #f5f5f5;
+}
+
+div:hover .canvas-overlay {
+    opacity: 0.5;
+}
+
+div.demo-grid{
+    width: 400px;
+    height: auto;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    min-width: 320px;
+}
+
+div.demo-disc{
+    margin-left: 40px;
 }
 
 ul {
@@ -153,6 +258,12 @@ iframe {
     border-width: 0;
     height: 100vh;
     width: 100vw;
+}
+
+iframe.p5canvas {
+    width: 320px;
+    height: 320px;
+    overflow: hidden;
 }
 
 .section-heading {
@@ -605,15 +716,15 @@ and (-webkit-min-device-pixel-ratio: 2) {
         padding: 20px;
     }
 
-    li.note-item{
+    li.note-item {
         font-size: .8em;
     }
 
-    h2{
+    h2 {
         font-size: 1em;
     }
 
-    h3{
+    h3 {
         font-size: .9em;
     }
 }
