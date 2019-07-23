@@ -1,5 +1,7 @@
-## violetyao.github.io
+Hi! I'm Violet Yao.
 
-#### A great thanks to [Ziyao Zhang](https://github.com/ziyaointl) and [Yuhong Chen](https://github.com/FX196) for inspiration and guidance. 
+This is my personal page. 
 
-#### If you are interested to learn more, please feel free to contact me at violetyao@berkeley.edu. 
+A great thanks to [Ziyao Zhang](https://github.com/ziyaointl) and [Yuhong Chen](https://github.com/FX196) for inspiration and guidance. 
+
+If you want to learn more, please feel free to contact me at violetyao@berkeley.edu
