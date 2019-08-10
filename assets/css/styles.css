@@ -6891,7 +6891,7 @@ nav a {
   color: black;
 }
 .background {
-  background-image: url("../files/background.jpg");
+  background-image: url("../img/background.jpg");
   background-size: cover;
 }
 .subtitle {
