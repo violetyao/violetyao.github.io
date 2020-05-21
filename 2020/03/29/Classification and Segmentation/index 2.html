@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"violetyao.github.io","root":"/","scheme":"Muse","version":"7.7.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="Project 4: Classification and SegmentationViolet Yao (cs194-26-asf) Part 1: Image ClassificationFor part 1, we will use the Fasion MNIST dataset available in torchvision.datasets.FashionMNIST for trai">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Classification and Segmentation">
+<meta property="og:url" content="https://violetyao.github.io/2020/03/29/Classification%20and%20Segmentation/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="Project 4: Classification and SegmentationViolet Yao (cs194-26-asf) Part 1: Image ClassificationFor part 1, we will use the Fasion MNIST dataset available in torchvision.datasets.FashionMNIST for trai">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://violetyao.github.io/2020/03/29/Classification%20and%20Segmentation/images/fashion.jpg">
+<meta property="og:image" content="https://violetyao.github.io/2020/03/29/Classification%20and%20Segmentation/images/part1_acc.jpg">
+<meta property="og:image" content="https://violetyao.github.io/2020/03/29/Classification%20and%20Segmentation/images/correct_img/BagTrue1actualBag.jpg">
+<meta property="og:image" content="https://violetyao.github.io/2020/03/29/Classification%20and%20Segmentation/images/correct_img/BagTrue2actualBag.jpg">
+<meta property="og:image" content="https://violetyao.github.io/2020/03/29/Classification%20and%20Segmentation/images/incorrect_img/BagFalse1actualShirt.jpg">
+<meta property="og:image" content="https://violetyao.github.io/2020/03/29/Classification%20and%20Segmentation/images/incorrect_img/BagFalse2actualT-Shirt.jpg">
+<meta property="og:image" content="https://violetyao.github.io/2020/03/29/Classification%20and%20Segmentation/images/correct_img/CoatTrue1actualCoat.jpg">
+<meta property="og:image" content="https://violetyao.github.io/2020/03/29/Classification%20and%20Segmentation/images/correct_img/CoatTrue2actualCoat.jpg">
+<meta property="og:image" content="https://violetyao.github.io/2020/03/29/Classification%20and%20Segmentation/images/incorrect_img/CoatFalse1actualShirt.jpg">
+<meta property="og:image" content="https://violetyao.github.io/2020/03/29/Classification%20and%20Segmentation/images/incorrect_img/CoatFalse2actualDress.jpg">
+<meta property="og:image" content="https://violetyao.github.io/2020/03/29/Classification%20and%20Segmentation/images/correct_img/DressTrue1actualDress.jpg">
+<meta property="og:image" content="https://violetyao.github.io/2020/03/29/Classification%20and%20Segmentation/images/correct_img/DressTrue2actualDress.jpg">
+<meta property="og:image" content="https://violetyao.github.io/2020/03/29/Classification%20and%20Segmentation/images/incorrect_img/DressFalse1actualTrouser.jpg">
+<meta property="og:image" content="https://violetyao.github.io/2020/03/29/Classification%20and%20Segmentation/images/incorrect_img/DressFalse2actualShirt.jpg">
+<meta property="og:image" content="https://violetyao.github.io/2020/03/29/Classification%20and%20Segmentation/images/correct_img/PulloverTrue1actualPullover.jpg">
+<meta property="og:image" content="https://violetyao.github.io/2020/03/29/Classification%20and%20Segmentation/images/correct_img/PulloverTrue2actualPullover.jpg">
+<meta property="og:image" content="https://violetyao.github.io/2020/03/29/Classification%20and%20Segmentation/images/incorrect_img/PulloverFalse1actualShirt.jpg">
+<meta property="og:image" content="https://violetyao.github.io/2020/03/29/Classification%20and%20Segmentation/images/incorrect_img/PulloverFalse2actualShirt.jpg">
+<meta property="og:image" content="https://violetyao.github.io/2020/03/29/Classification%20and%20Segmentation/images/correct_img/SandalTrue1actualSandal.jpg">
+<meta property="og:image" content="https://violetyao.github.io/2020/03/29/Classification%20and%20Segmentation/images/correct_img/SandalTrue2actualSandal.jpg">
+<meta property="og:image" content="https://violetyao.github.io/2020/03/29/Classification%20and%20Segmentation/images/incorrect_img/SandalFalse1actualSneaker.jpg">
+<meta property="og:image" content="https://violetyao.github.io/2020/03/29/Classification%20and%20Segmentation/images/incorrect_img/SandalFalse2actualAnkleBoot.jpg">
+<meta property="og:image" content="https://violetyao.github.io/2020/03/29/Classification%20and%20Segmentation/images/correct_img/ShirtTrue1actualShirt.jpg">
+<meta property="og:image" content="https://violetyao.github.io/2020/03/29/Classification%20and%20Segmentation/images/correct_img/ShirtTrue2actualShirt.jpg">
+<meta property="og:image" content="https://violetyao.github.io/2020/03/29/Classification%20and%20Segmentation/images/incorrect_img/ShirtFalse1actualT-Shirt.jpg">
+<meta property="og:image" content="https://violetyao.github.io/2020/03/29/Classification%20and%20Segmentation/images/incorrect_img/ShirtFalse2actualCoat.jpg">
+<meta property="og:image" content="https://violetyao.github.io/2020/03/29/Classification%20and%20Segmentation/images/correct_img/SneakerTrue1actualSneaker.jpg">
+<meta property="og:image" content="https://violetyao.github.io/2020/03/29/Classification%20and%20Segmentation/images/correct_img/SneakerTrue2actualSneaker.jpg">
+<meta property="og:image" content="https://violetyao.github.io/2020/03/29/Classification%20and%20Segmentation/images/incorrect_img/SneakerFalse1actualSandal.jpg">
+<meta property="og:image" content="https://violetyao.github.io/2020/03/29/Classification%20and%20Segmentation/images/incorrect_img/SneakerFalse2actualSandal.jpg">
+<meta property="og:image" content="https://violetyao.github.io/2020/03/29/Classification%20and%20Segmentation/images/correct_img/T-ShirtTrue1actualT-Shirt.jpg">
+<meta property="og:image" content="https://violetyao.github.io/2020/03/29/Classification%20and%20Segmentation/images/correct_img/T-ShirtTrue2actualT-Shirt.jpg">
+<meta property="og:image" content="https://violetyao.github.io/2020/03/29/Classification%20and%20Segmentation/images/incorrect_img/T-ShirtFalse1actualShirt.jpg">
+<meta property="og:image" content="https://violetyao.github.io/2020/03/29/Classification%20and%20Segmentation/images/incorrect_img/T-ShirtFalse2actualShirt.jpg">
+<meta property="og:image" content="https://violetyao.github.io/2020/03/29/Classification%20and%20Segmentation/images/correct_img/TrouserTrue1actualTrouser.jpg">
+<meta property="og:image" content="https://violetyao.github.io/2020/03/29/Classification%20and%20Segmentation/images/correct_img/TrouserTrue2actualTrouser.jpg">
+<meta property="og:image" content="https://violetyao.github.io/2020/03/29/Classification%20and%20Segmentation/images/incorrect_img/TrouserFalse1actualDress.jpg">
+<meta property="og:image" content="https://violetyao.github.io/2020/03/29/Classification%20and%20Segmentation/images/incorrect_img/TrouserFalse2actualShirt.jpg">
+<meta property="og:image" content="https://violetyao.github.io/2020/03/29/Classification%20and%20Segmentation/images/part1_kernel.jpg">
+<meta property="og:image" content="https://violetyao.github.io/2020/03/29/Classification%20and%20Segmentation/images/segmentation.jpg">
+<meta property="og:image" content="https://violetyao.github.io/2020/03/29/Classification%20and%20Segmentation/images/part2_loss.jpg">
+<meta property="og:image" content="https://violetyao.github.io/2020/03/29/Classification%20and%20Segmentation/images/part2_architecture.jpg">
+<meta property="og:image" content="https://violetyao.github.io/2020/03/29/Classification%20and%20Segmentation/images/part2_avg_AP.jpg">
+<meta property="og:image" content="https://violetyao.github.io/2020/03/29/Classification%20and%20Segmentation/images/my_collection/mycollection.jpg">
+<meta property="og:image" content="https://violetyao.github.io/2020/03/29/Classification%20and%20Segmentation/images/my_collection/y_test4.png">
+<meta property="article:published_time" content="2020-03-30T00:56:45.351Z">
+<meta property="article:modified_time" content="2020-05-21T03:50:55.749Z">
+<meta property="article:author" content="Violet Yao">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://violetyao.github.io/2020/03/29/Classification%20and%20Segmentation/images/fashion.jpg">
+
+<link rel="canonical" href="https://violetyao.github.io/2020/03/29/Classification%20and%20Segmentation/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true
+  };
+</script>
+
+  <title>Classification and Segmentation | Hexo</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Hexo</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>Archives</a>
+
+  </li>
+  </ul>
+
+</nav>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="en">
+    <link itemprop="mainEntityOfPage" href="https://violetyao.github.io/2020/03/29/Classification%20and%20Segmentation/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Violet Yao">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Classification and Segmentation
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2020-03-29 17:56:45" itemprop="dateCreated datePublished" datetime="2020-03-29T17:56:45-07:00">2020-03-29</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-05-20 20:50:55" itemprop="dateModified" datetime="2020-05-20T20:50:55-07:00">2020-05-20</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="Project-4-Classification-and-Segmentation"><a href="#Project-4-Classification-and-Segmentation" class="headerlink" title="Project 4: Classification and Segmentation"></a>Project 4: Classification and Segmentation</h2><p>Violet Yao (cs194-26-asf)</p>
+<h3 id="Part-1-Image-Classification"><a href="#Part-1-Image-Classification" class="headerlink" title="Part 1: Image Classification"></a>Part 1: Image Classification</h3><p>For part 1, we will use the Fasion MNIST dataset available in torchvision.datasets.FashionMNIST for training our model. Fashion MNIST has 10 classes and 60000 train + validation images and 10000 test images.</p>
+<p><img src="images/fashion.jpg" alt=""></p>
+<h4 id="Train-amp-Validation-Accuracy"><a href="#Train-amp-Validation-Accuracy" class="headerlink" title="Train &amp; Validation Accuracy"></a>Train &amp; Validation Accuracy</h4><p>My model reaches 91.59% training accuracy and 90.99 % validation accuracy over 30 epoches using a 0.001 learning rate, adam optimizer with 0.0005 weight decay</p>
+<p><img src="images/part1_acc.jpg" alt=""></p>
+<p> Final Validation Accuracy       | Final Test Accuracy      |<br>| ————- |:————-:|<br>| 91.59  | 90.99 |</p>
+<h4 id="Per-Class-Accuracy"><a href="#Per-Class-Accuracy" class="headerlink" title="Per Class Accuracy"></a>Per Class Accuracy</h4><p>Classes        | Accuracy<br>| ————- |:————-:|<br>| T-shirt  | 0.836 |<br>| Trouser   | 0.979      |<br>| Pullover | 0.871    |<br>| Dress | 0.896 |<br>| Coat | 0.853  |<br>| Sandal | 0.975|<br>| Shirt | 0.771   |<br>| Sneaker| 0.968 |<br>| Bag | 0.980   |<br>| Ankle Boot| 0.970    |   </p>
+<h4 id="Which-classes-were-hardest-to-classify"><a href="#Which-classes-were-hardest-to-classify" class="headerlink" title="Which classes were hardest to classify?"></a>Which classes were hardest to classify?</h4><p>The model does not perform well on T-shirt (0.836) and Shirt (0.771). I took a look at the incorrectly predicted images and there are many cases where T-shirt predicted to be Shirt and Shirt predicted to be T-shirt. It makes sense because they are both tops with sleeves and visually difficult to tell.</p>
+<h4 id="Correctly-and-Incorrectly-Classified-Images-for-Each-Class"><a href="#Correctly-and-Incorrectly-Classified-Images-for-Each-Class" class="headerlink" title="Correctly and Incorrectly Classified Images for Each Class"></a>Correctly and Incorrectly Classified Images for Each Class</h4><p>Below I will show 2 images from each class which the network classifies correctly, and 2 more images where it classifies incorrectly.</p>
+<h5 id="Ankle-Boot"><a href="#Ankle-Boot" class="headerlink" title="Ankle Boot"></a>Ankle Boot</h5><table>
+<thead>
+<tr>
+<th align="center">Correct 1</th>
+<th align="center">Correct 2</th>
+<th align="center">Incorrect 1</th>
+<th align="center">Incorrect 2</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">![](images/correct_img/Ankle BootTrue1actualAnkle Boot.jpg)</td>
+<td align="center">![](images/correct_img/Ankle BootTrue2actualAnkle Boot.jpg)</td>
+<td align="center">![](images/incorrect_img/Ankle BootFalse1actualSneaker.jpg)</td>
+<td align="center">![](images/incorrect_img/Ankle BootFalse2actualSandal.jpg)</td>
+</tr>
+</tbody></table>
+<h5 id="Bag"><a href="#Bag" class="headerlink" title="Bag"></a>Bag</h5><table>
+<thead>
+<tr>
+<th align="center">Correct 1</th>
+<th align="center">Correct 2</th>
+<th align="center">Incorrect 1</th>
+<th align="center">Incorrect 2</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center"><img src="images/correct_img/BagTrue1actualBag.jpg" alt=""></td>
+<td align="center"><img src="images/correct_img/BagTrue2actualBag.jpg" alt=""></td>
+<td align="center"><img src="images/incorrect_img/BagFalse1actualShirt.jpg" alt=""></td>
+<td align="center"><img src="images/incorrect_img/BagFalse2actualT-Shirt.jpg" alt=""></td>
+</tr>
+</tbody></table>
+<h5 id="Coat"><a href="#Coat" class="headerlink" title="Coat"></a>Coat</h5><table>
+<thead>
+<tr>
+<th align="center">Correct 1</th>
+<th align="center">Correct 2</th>
+<th align="center">Incorrect 1</th>
+<th align="center">Incorrect 2</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center"><img src="images/correct_img/CoatTrue1actualCoat.jpg" alt=""></td>
+<td align="center"><img src="images/correct_img/CoatTrue2actualCoat.jpg" alt=""></td>
+<td align="center"><img src="images/incorrect_img/CoatFalse1actualShirt.jpg" alt=""></td>
+<td align="center"><img src="images/incorrect_img/CoatFalse2actualDress.jpg" alt=""></td>
+</tr>
+</tbody></table>
+<h5 id="Dress"><a href="#Dress" class="headerlink" title="Dress"></a>Dress</h5><table>
+<thead>
+<tr>
+<th align="center">Correct 1</th>
+<th align="center">Correct 2</th>
+<th align="center">Incorrect 1</th>
+<th align="center">Incorrect 2</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center"><img src="images/correct_img/DressTrue1actualDress.jpg" alt=""></td>
+<td align="center"><img src="images/correct_img/DressTrue2actualDress.jpg" alt=""></td>
+<td align="center"><img src="images/incorrect_img/DressFalse1actualTrouser.jpg" alt=""></td>
+<td align="center"><img src="images/incorrect_img/DressFalse2actualShirt.jpg" alt=""></td>
+</tr>
+</tbody></table>
+<h5 id="Pullover"><a href="#Pullover" class="headerlink" title="Pullover"></a>Pullover</h5><table>
+<thead>
+<tr>
+<th align="center">Correct 1</th>
+<th align="center">Correct 2</th>
+<th align="center">Incorrect 1</th>
+<th align="center">Incorrect 2</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center"><img src="images/correct_img/PulloverTrue1actualPullover.jpg" alt=""></td>
+<td align="center"><img src="images/correct_img/PulloverTrue2actualPullover.jpg" alt=""></td>
+<td align="center"><img src="images/incorrect_img/PulloverFalse1actualShirt.jpg" alt=""></td>
+<td align="center"><img src="images/incorrect_img/PulloverFalse2actualShirt.jpg" alt=""></td>
+</tr>
+</tbody></table>
+<h5 id="Sandal"><a href="#Sandal" class="headerlink" title="Sandal"></a>Sandal</h5><table>
+<thead>
+<tr>
+<th align="center">Correct 1</th>
+<th align="center">Correct 2</th>
+<th align="center">Incorrect 1</th>
+<th align="center">Incorrect 2</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center"><img src="images/correct_img/SandalTrue1actualSandal.jpg" alt=""></td>
+<td align="center"><img src="images/correct_img/SandalTrue2actualSandal.jpg" alt=""></td>
+<td align="center"><img src="images/incorrect_img/SandalFalse1actualSneaker.jpg" alt=""></td>
+<td align="center"><img src="images/incorrect_img/SandalFalse2actualAnkleBoot.jpg" alt=""></td>
+</tr>
+</tbody></table>
+<h5 id="Shirt"><a href="#Shirt" class="headerlink" title="Shirt"></a>Shirt</h5><table>
+<thead>
+<tr>
+<th align="center">Correct 1</th>
+<th align="center">Correct 2</th>
+<th align="center">Incorrect 1</th>
+<th align="center">Incorrect 2</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center"><img src="images/correct_img/ShirtTrue1actualShirt.jpg" alt=""></td>
+<td align="center"><img src="images/correct_img/ShirtTrue2actualShirt.jpg" alt=""></td>
+<td align="center"><img src="images/incorrect_img/ShirtFalse1actualT-Shirt.jpg" alt=""></td>
+<td align="center"><img src="images/incorrect_img/ShirtFalse2actualCoat.jpg" alt=""></td>
+</tr>
+</tbody></table>
+<h5 id="Sneaker"><a href="#Sneaker" class="headerlink" title="Sneaker"></a>Sneaker</h5><table>
+<thead>
+<tr>
+<th align="center">Correct 1</th>
+<th align="center">Correct 2</th>
+<th align="center">Incorrect 1</th>
+<th align="center">Incorrect 2</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center"><img src="images/correct_img/SneakerTrue1actualSneaker.jpg" alt=""></td>
+<td align="center"><img src="images/correct_img/SneakerTrue2actualSneaker.jpg" alt=""></td>
+<td align="center"><img src="images/incorrect_img/SneakerFalse1actualSandal.jpg" alt=""></td>
+<td align="center"><img src="images/incorrect_img/SneakerFalse2actualSandal.jpg" alt=""></td>
+</tr>
+</tbody></table>
+<h5 id="T-Shirt"><a href="#T-Shirt" class="headerlink" title="T-Shirt"></a>T-Shirt</h5><table>
+<thead>
+<tr>
+<th align="center">Correct 1</th>
+<th align="center">Correct 2</th>
+<th align="center">Incorrect 1</th>
+<th align="center">Incorrect 2</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center"><img src="images/correct_img/T-ShirtTrue1actualT-Shirt.jpg" alt=""></td>
+<td align="center"><img src="images/correct_img/T-ShirtTrue2actualT-Shirt.jpg" alt=""></td>
+<td align="center"><img src="images/incorrect_img/T-ShirtFalse1actualShirt.jpg" alt=""></td>
+<td align="center"><img src="images/incorrect_img/T-ShirtFalse2actualShirt.jpg" alt=""></td>
+</tr>
+</tbody></table>
+<h5 id="Trouser"><a href="#Trouser" class="headerlink" title="Trouser"></a>Trouser</h5><table>
+<thead>
+<tr>
+<th align="center">Correct 1</th>
+<th align="center">Correct 2</th>
+<th align="center">Incorrect 1</th>
+<th align="center">Incorrect 2</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center"><img src="images/correct_img/TrouserTrue1actualTrouser.jpg" alt=""></td>
+<td align="center"><img src="images/correct_img/TrouserTrue2actualTrouser.jpg" alt=""></td>
+<td align="center"><img src="images/incorrect_img/TrouserFalse1actualDress.jpg" alt=""></td>
+<td align="center"><img src="images/incorrect_img/TrouserFalse2actualShirt.jpg" alt=""></td>
+</tr>
+</tbody></table>
+<h4 id="Learned-filter-visualization"><a href="#Learned-filter-visualization" class="headerlink" title="Learned filter visualization"></a>Learned filter visualization</h4><p>Here is the visualization of first conv layer!</p>
+<p><img src="images/part1_kernel.jpg" alt=""></p>
+<h3 id="Part-2-Semantic-Segmentation"><a href="#Part-2-Semantic-Segmentation" class="headerlink" title="Part 2: Semantic Segmentation"></a>Part 2: Semantic Segmentation</h3><p>Semantic Segmentation refers to labeling each pixel in the image to its correct object class. For this part, we will use the Mini Facade dataset. Mini Facade dataset consists of images of different cities around the world and diverse architectural styles (in .jpg format), shown as the image on the left. It also contains semantic segmentation labels (in .png format) in 5 different classes: balcony, window, pillar, facade and others. I will train a network to convert image on the left to the labels on the right.</p>
+<p><img src="images/segmentation.jpg" alt=""></p>
+<h4 id="Train-amp-Validation-Accuracy-1"><a href="#Train-amp-Validation-Accuracy-1" class="headerlink" title="Train &amp; Validation Accuracy"></a>Train &amp; Validation Accuracy</h4><p>My mode decreases to 0.8544542159427676 test loss over 30 epoches using 0.001 learning rate and adam optimizer with 0.0005 weight decay.</p>
+<p><img src="images/part2_loss.jpg" alt=""></p>
+<h4 id="Model-Architecture"><a href="#Model-Architecture" class="headerlink" title="Model Architecture"></a>Model Architecture</h4><p>It turns out that the simple architecture of stacks of conv, relu, max_pool and a bit dropout works the best. Please find detailed structure below.</p>
+<p><img src="images/part2_architecture.jpg" alt=""></p>
+<h4 id="Average-Precision-on-Test-Set"><a href="#Average-Precision-on-Test-Set" class="headerlink" title="Average Precision on Test Set"></a>Average Precision on Test Set</h4><p>The average precision of all classes is 0.53.</p>
+<p><img src="images/part2_avg_AP.jpg" alt=""></p>
+<h4 id="Model’s-Performance-for-My-Own-Collection"><a href="#Model’s-Performance-for-My-Own-Collection" class="headerlink" title="Model’s Performance for My Own Collection"></a>Model’s Performance for My Own Collection</h4><p>Overall the model does a good job on my collection. It is able to catch most of the pillars and windows. However, it predicts quite a few facade to be balcony (in the upper side of the original image) and some background to be facade.</p>
+<table>
+<thead>
+<tr>
+<th align="center">Original image</th>
+<th align="center">Segmented by my model</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center"><img src="images/my_collection/mycollection.jpg" alt=""></td>
+<td align="center"><img src="images/my_collection/y_test4.png" alt=""></td>
+</tr>
+</tbody></table>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/03/15/Face%20Morphing/" rel="prev" title="Face Morphing">
+      <i class="fa fa-chevron-left"></i> Face Morphing
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2020/04/19/%5BAuto%5DStitching%20Photo%20Mosaics/" rel="next" title="[Auto]Stitching Photo Mosaics">
+      [Auto]Stitching Photo Mosaics <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Project-4-Classification-and-Segmentation"><span class="nav-number">1.</span> <span class="nav-text">Project 4: Classification and Segmentation</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Part-1-Image-Classification"><span class="nav-number">1.1.</span> <span class="nav-text">Part 1: Image Classification</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Train-amp-Validation-Accuracy"><span class="nav-number">1.1.1.</span> <span class="nav-text">Train &amp; Validation Accuracy</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Per-Class-Accuracy"><span class="nav-number">1.1.2.</span> <span class="nav-text">Per Class Accuracy</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Which-classes-were-hardest-to-classify"><span class="nav-number">1.1.3.</span> <span class="nav-text">Which classes were hardest to classify?</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Correctly-and-Incorrectly-Classified-Images-for-Each-Class"><span class="nav-number">1.1.4.</span> <span class="nav-text">Correctly and Incorrectly Classified Images for Each Class</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Ankle-Boot"><span class="nav-number">1.1.4.1.</span> <span class="nav-text">Ankle Boot</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Bag"><span class="nav-number">1.1.4.2.</span> <span class="nav-text">Bag</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Coat"><span class="nav-number">1.1.4.3.</span> <span class="nav-text">Coat</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Dress"><span class="nav-number">1.1.4.4.</span> <span class="nav-text">Dress</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Pullover"><span class="nav-number">1.1.4.5.</span> <span class="nav-text">Pullover</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Sandal"><span class="nav-number">1.1.4.6.</span> <span class="nav-text">Sandal</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Shirt"><span class="nav-number">1.1.4.7.</span> <span class="nav-text">Shirt</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Sneaker"><span class="nav-number">1.1.4.8.</span> <span class="nav-text">Sneaker</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#T-Shirt"><span class="nav-number">1.1.4.9.</span> <span class="nav-text">T-Shirt</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Trouser"><span class="nav-number">1.1.4.10.</span> <span class="nav-text">Trouser</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Learned-filter-visualization"><span class="nav-number">1.1.5.</span> <span class="nav-text">Learned filter visualization</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Part-2-Semantic-Segmentation"><span class="nav-number">1.2.</span> <span class="nav-text">Part 2: Semantic Segmentation</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Train-amp-Validation-Accuracy-1"><span class="nav-number">1.2.1.</span> <span class="nav-text">Train &amp; Validation Accuracy</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Model-Architecture"><span class="nav-number">1.2.2.</span> <span class="nav-text">Model Architecture</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Average-Precision-on-Test-Set"><span class="nav-number">1.2.3.</span> <span class="nav-text">Average Precision on Test Set</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Model’s-Performance-for-My-Own-Collection"><span class="nav-number">1.2.4.</span> <span class="nav-text">Model’s Performance for My Own Collection</span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Violet Yao</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">6</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Violet Yao</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> v4.2.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">Theme – <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v7.7.2
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
