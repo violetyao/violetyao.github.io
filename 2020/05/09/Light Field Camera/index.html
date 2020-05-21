@@ -20,32 +20,34 @@
     var CONFIG = {"hostname":"violetyao.github.io","root":"/blog/","scheme":"Muse","version":"7.7.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="proj5    body {   font-family: Helvetica, arial, sans-serif;   font-size: 14px;   line-height: 1.6;   padding-top: 10px;   padding-bottom: 10px;   background-color: white;   padding: 30px; }  b">
+  <meta name="description" content="final_proj    body {   font-family: Helvetica, arial, sans-serif;   font-size: 14px;   line-height: 1.6;   padding-top: 10px;   padding-bottom: 10px;   background-color: white;   padding: 30px;">
 <meta property="og:type" content="article">
-<meta property="og:title" content="[Auto]Stitching Photo Mosaics">
-<meta property="og:url" content="https://violetyao.github.io/blog/2020/04/19/[Auto]Stitching%20Photo%20Mosaics/index.html">
+<meta property="og:title" content="Light Field Camera">
+<meta property="og:url" content="https://violetyao.github.io/blog/2020/05/09/Light%20Field%20Camera/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="proj5    body {   font-family: Helvetica, arial, sans-serif;   font-size: 14px;   line-height: 1.6;   padding-top: 10px;   padding-bottom: 10px;   background-color: white;   padding: 30px; }  b">
+<meta property="og:description" content="final_proj    body {   font-family: Helvetica, arial, sans-serif;   font-size: 14px;   line-height: 1.6;   padding-top: 10px;   padding-bottom: 10px;   background-color: white;   padding: 30px;">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://violetyao.github.io/blog/2020/04/19/[Auto]Stitching%20Photo%20Mosaics/images/rectified1.jpg">
-<meta property="og:image" content="https://violetyao.github.io/blog/2020/04/19/[Auto]Stitching%20Photo%20Mosaics/images/rectified2.jpg">
-<meta property="og:image" content="https://violetyao.github.io/blog/2020/04/19/[Auto]Stitching%20Photo%20Mosaics/images/original.png">
-<meta property="og:image" content="https://violetyao.github.io/blog/2020/04/19/[Auto]Stitching%20Photo%20Mosaics/images/linear_blending.png">
-<meta property="og:image" content="https://violetyao.github.io/blog/2020/04/19/[Auto]Stitching%20Photo%20Mosaics/images/Harris%20Interest%20Point%20Detector.png">
-<meta property="og:image" content="https://violetyao.github.io/blog/2020/04/19/[Auto]Stitching%20Photo%20Mosaics/images/Adaptive%20Non-Maximal%20Suppression.png">
-<meta property="og:image" content="https://violetyao.github.io/blog/2020/04/19/[Auto]Stitching%20Photo%20Mosaics/images/Feature%20Matching.png">
-<meta property="og:image" content="https://violetyao.github.io/blog/2020/04/19/[Auto]Stitching%20Photo%20Mosaics/images/RANSAC.png">
-<meta property="og:image" content="https://violetyao.github.io/blog/2020/04/19/[Auto]Stitching%20Photo%20Mosaics/images/auto_result.jpg">
-<meta property="og:image" content="https://violetyao.github.io/blog/2020/04/19/[Auto]Stitching%20Photo%20Mosaics/images/linear_blending.png">
-<meta property="og:image" content="https://violetyao.github.io/blog/2020/04/19/[Auto]Stitching%20Photo%20Mosaics/images/auto.png">
-<meta property="og:image" content="https://violetyao.github.io/blog/2020/04/19/[Auto]Stitching%20Photo%20Mosaics/images/auto_kitchen.jpg">
-<meta property="article:published_time" content="2020-04-19T07:39:06.602Z">
-<meta property="article:modified_time" content="2020-05-21T04:30:11.907Z">
+<meta property="og:image" content="https://violetyao.github.io/blog/2020/05/09/Light%20Field%20Camera/images/shift1.png">
+<meta property="og:image" content="https://violetyao.github.io/blog/2020/05/09/Light%20Field%20Camera/images/shift2.png">
+<meta property="og:image" content="https://violetyao.github.io/blog/2020/05/09/Light%20Field%20Camera/images/shift3.png">
+<meta property="og:image" content="https://violetyao.github.io/blog/2020/05/09/Light%20Field%20Camera/images/shift4.png">
+<meta property="og:image" content="https://violetyao.github.io/blog/2020/05/09/Light%20Field%20Camera/images/shift5.png">
+<meta property="og:image" content="https://violetyao.github.io/blog/2020/05/09/Light%20Field%20Camera/gif/chess_depth.gif">
+<meta property="og:image" content="https://violetyao.github.io/blog/2020/05/09/Light%20Field%20Camera/gif/bunny_depth.gif">
+<meta property="og:image" content="https://violetyao.github.io/blog/2020/05/09/Light%20Field%20Camera/images/aperture_0_average.png">
+<meta property="og:image" content="https://violetyao.github.io/blog/2020/05/09/Light%20Field%20Camera/images/aperture_2_average.png">
+<meta property="og:image" content="https://violetyao.github.io/blog/2020/05/09/Light%20Field%20Camera/images/aperture_4_average.png">
+<meta property="og:image" content="https://violetyao.github.io/blog/2020/05/09/Light%20Field%20Camera/images/aperture_6_average.png">
+<meta property="og:image" content="https://violetyao.github.io/blog/2020/05/09/Light%20Field%20Camera/images/aperture_8_average.png">
+<meta property="og:image" content="https://violetyao.github.io/blog/2020/05/09/Light%20Field%20Camera/gif/chess_aperture.gif">
+<meta property="og:image" content="https://violetyao.github.io/blog/2020/05/09/Light%20Field%20Camera/gif/bunny_aperture.gif">
+<meta property="article:published_time" content="2020-05-09T23:14:53.000Z">
+<meta property="article:modified_time" content="2020-05-21T04:34:00.722Z">
 <meta property="article:author" content="Violet Yao">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://violetyao.github.io/blog/2020/04/19/[Auto]Stitching%20Photo%20Mosaics/images/rectified1.jpg">
+<meta name="twitter:image" content="https://violetyao.github.io/blog/2020/05/09/Light%20Field%20Camera/images/shift1.png">
 
-<link rel="canonical" href="https://violetyao.github.io/blog/2020/04/19/[Auto]Stitching%20Photo%20Mosaics/">
+<link rel="canonical" href="https://violetyao.github.io/blog/2020/05/09/Light%20Field%20Camera/">
 
 
 <script id="page-configurations">
@@ -57,7 +59,7 @@
   };
 </script>
 
-  <title>[Auto]Stitching Photo Mosaics | Hexo</title>
+  <title>Light Field Camera | Hexo</title>
   
 
 
@@ -161,7 +163,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="en">
-    <link itemprop="mainEntityOfPage" href="https://violetyao.github.io/blog/2020/04/19/[Auto]Stitching%20Photo%20Mosaics/">
+    <link itemprop="mainEntityOfPage" href="https://violetyao.github.io/blog/2020/05/09/Light%20Field%20Camera/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/blog/images/avatar.gif">
@@ -174,7 +176,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          [Auto]Stitching Photo Mosaics
+          Light Field Camera
         </h1>
 
         <div class="post-meta">
@@ -184,14 +186,14 @@
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2020-04-19 00:39:06" itemprop="dateCreated datePublished" datetime="2020-04-19T00:39:06-07:00">2020-04-19</time>
+              <time title="Created: 2020-05-09 16:14:53" itemprop="dateCreated datePublished" datetime="2020-05-09T16:14:53-07:00">2020-05-09</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-05-20 21:30:11" itemprop="dateModified" datetime="2020-05-20T21:30:11-07:00">2020-05-20</time>
+                <time title="Modified: 2020-05-20 21:34:00" itemprop="dateModified" datetime="2020-05-20T21:34:00-07:00">2020-05-20</time>
               </span>
 
           
@@ -212,7 +214,7 @@
 
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-<title>proj5</title>
+<title>final_proj</title>
 
 
 <style type="text/css">
@@ -675,95 +677,51 @@ pre[class*="language-"] {
 
 <body>
 
+<h4 id="toc_2">Overview</h4>
 
+<p>As <a href="http://graphics.stanford.edu/papers/lfcamera/lfcamera-150dpi.pdf" target="_blank" rel="noopener">this paper</a> by Ng et al. demonstrated, capturing multiple images over a plane orthogonal to the optical axis enables achieving complex effects using very simple operations like shifting and averaging. The goal of this project is to reproduce some of these effects using real lightfield data.</p>
 
-<h2 id="toc_1">Part A: IMAGE WARPING and MOSAICING</h2>
+<p>In this project, we took some sample datasets from the <a href="http://lightfield.stanford.edu/lfs.html" target="_blank" rel="noopener">Stanford Light Field Archive</a>, where each dataset comprising of 289 views on a 17x17 grid.</p>
 
-<h3 id="toc_2">Recover Homographies</h3>
+<h4 id="toc_2">1) Depth Refocusing</h4>
 
-<p>Before we could warp images into alignment, we need to recover the need to recover the parameters of the transformation between each pair of images. In our case, the transformation is a homography: p’=Hp, where H is a 3x3 matrix with 8 degrees of freedom (lower right corner is a scaling factor and can be set to 1). To recover the homography, I collected a set of (p’,p) pairs of corresponding points taken from the two images using ginputs. </p>
+<p>The objects which are far away from the camera do not vary their position significantly when the camera moves around while keeping the optical axis direction unchanged. The nearby objects, on the other hand, vary their position significantly across images. Averaging all the images in the grid without any shifting will produce an image which is sharp around the far-away objects but blurry around the nearby ones. Similarly, shifting the images appropriately and then averaging allows one to focus on object at different depths.</p>
 
-<p>\[H = computeH(im1\_pts,im2\_pts)\]</p>
+<p>In this part of the project, we implement this idea to generate multiple images which focus at different depths. To get the best effects, we use all the grid images for averaging.</p>
 
-<p>In order to compute the entries in the matrix H, we need to set up a linear system of n equations (i.e. a matrix equation of the form Ah=b where h is a vector holding the 8 unknown entries of H). The system can thus be solved via four or more corresponding pairs. </p>
+<p>Below are averages of chess shifted to five different depths:
+<p float="left">
+  <img src="images/shift1.png" width="100" />
+  <img src="images/shift2.png" width="100" />
+  <img src="images/shift3.png" width="100" />
+  <img src="images/shift4.png" width="100" />
+  <img src="images/shift5.png" width="100" />
+</p></p>
 
-<h3 id="toc_3">Warp the Images</h3>
+<p>Or in gif format:
+<img src="gif/chess_depth.gif" alt=""></p>
 
-<p>Now that we know the parameters of the homography, we can go ahead to warp images using this homography. </p>
+<p>One more example:
+<img src="gif/bunny_depth.gif" alt=""></p>
 
-<p>\[imwarped = warpImage(im,H)\]</p>
+<h4 id="toc_3">2) Aperture Adjustment</h4>
 
-<p>where im is the input image to be warped and H is the homography. </p>
+<p>Averaging a large number of images sampled over the grid perpendicular to the optical axis mimics a camera with a much larger aperture. Using fewer images results in an image that mimics a smaller aperture. In part2, we generate averages of images filtered by different radius while focusing on the same point, which corresponds to different apertures.  </p>
 
-<h3 id="toc_4">Image Rectification</h3>
+<p>Below are averages of chess filtered by five different radius:</p>
 
-<p>Below are the examples for image rectification! The LHS ones are original images of planar surface and the RHS are those warped to frontal-parallel. </p>
+<p float="left">
+  <img src="images/aperture_0_average.png" width="100" />
+  <img src="images/aperture_2_average.png" width="100" />
+  <img src="images/aperture_4_average.png" width="100" />
+  <img src="images/aperture_6_average.png" width="100" />
+  <img src="images/aperture_8_average.png" width="100" />
+</p>
 
-<h5 id="toc_5">Example1: Granola Box</h5>
+<p>Here are the results:</p>
 
-<p><img src="images/rectified1.jpg" alt=""></p>
-
-<h5 id="toc_6">Example2: Rousseau&#39;s Reveries</h5>
-
-<p><img src="images/rectified2.jpg" alt=""></p>
-
-<h3 id="toc_7">Blend the images into a mosaic</h3>
-
-<p>In this part, I warp two images taken at the Grand Canyon so they&#39;re registered and create an image mosaic. Instead of having one picture overwrite the other, which would lead to strong edge artifacts, I used linear blending to make it more seamless. </p>
-
-<p><img src="images/original.png" alt=""></p>
-
-<p><img src="images/linear_blending.png" alt=""></p>
-
-<h2 id="toc_8">Part B: FEATURE MATCHING for AUTOSTITCHING</h2>
-
-<h3 id="toc_9">Harris Interest Point Detector</h3>
-
-<p>We use harris interest point detector, which is based on change of intensity when shifting a window to all directions, to automatically detect corners in the image. For left &amp; right image below, I plot the top 2000 detected corners for each. </p>
-
-<p><img src="images/Harris%20Interest%20Point%20Detector.png" alt=""></p>
-
-<h3 id="toc_10">Adaptive Non-Maximal Suppression</h3>
-
-<p>Harris interest point detector returns a large number of points and many of them are clustered together. To improve upon this, we utilize Adaptive Non-Maximal Suppression (ANMS) to reduce the number of points while still keeping the remaining points spreadout. I keep the top 500 points with largest radius. </p>
-
-<p><img src="images/Adaptive%20Non-Maximal%20Suppression.png" alt=""></p>
-
-<h3 id="toc_11">Feature Descriptor extraction &amp; Feature Matching</h3>
-
-<p>For each point, we extract a 8*8 feature patch from a 40 * 40 window. Then we should normalize the image to zero mean and a standard deviation of 1. </p>
-
-<p>Then, we proceed to match points between the two images by computing squared Euclidean distance between pairs of features (using dist2 from starter code). For each feature, we compute the ratio of best and second best and reject with a threshold of 0.2.</p>
-
-<p><img src="images/Feature%20Matching.png" alt=""></p>
-
-<h3 id="toc_12">RANSAC</h3>
-
-<p>In this step, we select points that will later be used to compute the final estimated homography matrix. Intuitively, good points produce similiar homography. So we iterate 10000 times, choose 4 random feature pairs each iteration, compute homography &amp; use it to warp img1 points to img2 &amp; measure how close they are to true img2 points, set a SSD threshold of 0.5, and keep the feature pairs with the largest number of inliers. </p>
-
-<p><img src="images/RANSAC.png" alt=""></p>
-
-<h3 id="toc_13">Result</h3>
-
-<p>Result from linear blending below: </p>
-
-<p><img src="images/auto_result.jpg" alt=""></p>
-
-<p>Manual result from part A:</p>
-
-<p><img src="images/linear_blending.png" alt=""></p>
-
-<p>Auto result from part B:</p>
-
-<p><img src="images/auto.png" alt=""></p>
-
-<p>Additional:
-<img src="images/auto_kitchen.jpg" alt="">
-(It does not perform well since the two only overlaps 20%)</p>
-
-<h4 id="toc_14">Tell us what you&#39;ve learned</h4>
-
-<p>I&#39;m amazed at how similar auto-selected points are to my manually select ones in part A &amp; how well they both perform. </p>
+<p><img src="gif/chess_aperture.gif" alt="">
+<img src="gif/bunny_aperture.gif" alt=""></p>
 
 
 
@@ -809,12 +767,12 @@ if (typeof MathJaxListener !== 'undefined') {
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/blog/2020/03/29/Classification%20and%20Segmentation/" rel="prev" title="Classification and Segmentation">
-      <i class="fa fa-chevron-left"></i> Classification and Segmentation
+    <a href="/blog/2020/04/19/%5BAuto%5DStitching%20Photo%20Mosaics/" rel="prev" title="[Auto]Stitching Photo Mosaics">
+      <i class="fa fa-chevron-left"></i> [Auto]Stitching Photo Mosaics
     </a></div>
       <div class="post-nav-item">
-    <a href="/blog/2020/05/09/Light%20Field%20Camera/" rel="next" title="Light Field Camera">
-      Light Field Camera <i class="fa fa-chevron-right"></i>
+    <a href="/blog/2020/05/09/Style%20transfer/" rel="next" title="Style transfer">
+      Style transfer <i class="fa fa-chevron-right"></i>
     </a></div>
     </div>
       </footer>
@@ -875,7 +833,7 @@ if (typeof MathJaxListener !== 'undefined') {
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#toc_1"><span class="nav-number">1.</span> <span class="nav-text">Part A: IMAGE WARPING and MOSAICING</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#toc_2"><span class="nav-number">1.1.</span> <span class="nav-text">Recover Homographies</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#toc_3"><span class="nav-number">1.2.</span> <span class="nav-text">Warp the Images</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#toc_4"><span class="nav-number">1.3.</span> <span class="nav-text">Image Rectification</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#toc_5"><span class="nav-number">1.3.0.1.</span> <span class="nav-text">Example1: Granola Box</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#toc_6"><span class="nav-number">1.3.0.2.</span> <span class="nav-text">Example2: Rousseau&#39;s Reveries</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#toc_7"><span class="nav-number">1.4.</span> <span class="nav-text">Blend the images into a mosaic</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#toc_8"><span class="nav-number">2.</span> <span class="nav-text">Part B: FEATURE MATCHING for AUTOSTITCHING</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#toc_9"><span class="nav-number">2.1.</span> <span class="nav-text">Harris Interest Point Detector</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#toc_10"><span class="nav-number">2.2.</span> <span class="nav-text">Adaptive Non-Maximal Suppression</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#toc_11"><span class="nav-number">2.3.</span> <span class="nav-text">Feature Descriptor extraction &amp; Feature Matching</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#toc_12"><span class="nav-number">2.4.</span> <span class="nav-text">RANSAC</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#toc_13"><span class="nav-number">2.5.</span> <span class="nav-text">Result</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#toc_14"><span class="nav-number">2.5.1.</span> <span class="nav-text">Tell us what you&#39;ve learned</span></a></li></ol></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#toc_2"><span class="nav-number">1.</span> <span class="nav-text">Overview</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#toc_2"><span class="nav-number">2.</span> <span class="nav-text">1) Depth Refocusing</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#toc_3"><span class="nav-number">3.</span> <span class="nav-text">2) Aperture Adjustment</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
